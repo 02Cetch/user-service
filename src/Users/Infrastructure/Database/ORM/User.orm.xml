@@ -1,0 +1,26 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="https://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\Users\Domain\Entity\User" table="user">
+
+        <indexes>
+            <index name="idx" columns="id"/>
+        </indexes>
+
+        <id name="id" type="integer">
+            <generator strategy="AUTO"/>
+        </id>
+
+        <field name="first_name" type="string" nullable="true"/>
+        <field name="last_name" type="string" nullable="true"/>
+        <field name="mid_name" type="string" nullable="true"/>
+        <field name="phone" type="string" nullable="true"/>
+        <field name="slack_id" type="string" nullable="true"/>
+        <field name="login" type="string" unique="true" nullable="false"/>
+        <field name="auth_key" type="string" nullable="true"/>
+        <field name="password" type="string" nullable="false"/>
+    </entity>
+
+</doctrine-mapping>
