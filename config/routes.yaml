@@ -7,3 +7,6 @@ kernel:
 users:
     resource: ../src/Users/Infrastructure/Controller/
     type: annotation
+admin:
+    resource: ../src/Admin/Infrastructure/Controller/
+    type: annotation

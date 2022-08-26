@@ -2,25 +2,30 @@
 
 namespace App\Users\Domain\Entity;
 
-use App\Shared\Domain\Security\AuthUserInterface;
 use App\Users\Domain\Service\UserPasswordHasherInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
-class User implements AuthUserInterface, UserInterface
+class User implements UserInterface
 {
     private int $id;
-
-    private string $first_name;
-    private string $last_name;
-    private string $mid_name;
-    private string $phone;
-    private string $slack_id;
     private string $login;
-
-    private string $auth_key;
     private string $password;
+    private array $roles;
 
-    public function __construct($login)
+    public string $virtual_password;
+    private string $virtual_role;
+
+    public string $first_name;
+    public string $last_name;
+    public string $mid_name;
+    public string $phone;
+    public string $slack_id;
+
+    public function __construct(array $roles = [])
+    {
+        $this->roles = $roles;
+    }
+
+    public function setLogin($login): void
     {
         $this->login = $login;
     }
@@ -40,14 +45,35 @@ class User implements AuthUserInterface, UserInterface
         return $this->password;
     }
 
+    public function setRoles($roles): void
+    {
+        $this->roles = $roles;
+    }
+
     public function getRoles(): array
     {
-        return [];
+        return $this->roles;
+    }
+
+    public function getVirtualRole()
+    {
+        return array_values($this->roles)[0] ?? $this->virtual_role;
+    }
+
+    public function setVirtualRole($role)
+    {
+        $this->virtual_role = $role;
+        $this->setRoles([$role]);
     }
 
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.
+    }
+
+    public function getId(): int
+    {
+        return $this->id;
     }
 
     public function getUserIdentifier(): string

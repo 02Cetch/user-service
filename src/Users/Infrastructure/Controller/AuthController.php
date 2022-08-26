@@ -4,6 +4,7 @@ namespace App\Users\Infrastructure\Controller;
 use App\Shared\Infrastructure\Controller\ApiController;
 use App\Users\Domain\Factory\UserFactory;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use App\Users\Infrastructure\Service\UserPasswordHasher;
@@ -34,9 +35,15 @@ class AuthController extends ApiController
         return $this->respondWithSuccess("User {$user->getLogin()} successfully created");
     }
 
+
     #[Route('/api/login/login_check', methods: ['GET'])]
     public function getUserToken(UserInterface $user, JWTTokenManagerInterface $tokenManager): JsonResponse
     {
-        return new JsonResponse(['token' => $tokenManager->create($user)]);
+//        $userToken = $tokenManager->create($user);
+//
+//        $jsonResponse = new JsonResponse(['token' => $userToken]);
+//        $jsonResponse->headers->setCookie(Cookie::create('usr_token', $userToken, time() + 3600));
+//
+//        return $jsonResponse;
     }
 }

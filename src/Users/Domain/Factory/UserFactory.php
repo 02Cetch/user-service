@@ -2,6 +2,7 @@
 
 namespace App\Users\Domain\Factory;
 
+use App\Users\Domain\Entity\ValueObject\UserRoles;
 use App\Users\Domain\Service\UserPasswordHasherInterface;
 use App\Users\Domain\Entity\User;
 class UserFactory
@@ -10,9 +11,10 @@ class UserFactory
     {
     }
 
-    public function create($login, $password): User
+    public function create($login, $password, array $roles = []): User
     {
-        $user = new User($login);
+        $user = new User($roles);
+        $user->setLogin($login);
         $user->setPassword($password, $this->passwordHasher);
         return $user;
     }
