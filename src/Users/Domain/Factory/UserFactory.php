@@ -2,7 +2,6 @@
 
 namespace App\Users\Domain\Factory;
 
-use App\Users\Domain\Entity\ValueObject\UserRoles;
 use App\Users\Domain\Service\UserPasswordHasherInterface;
 use App\Users\Domain\Entity\User;
 class UserFactory

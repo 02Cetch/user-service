@@ -34,16 +34,4 @@ class AuthController extends ApiController
 
         return $this->respondWithSuccess("User {$user->getLogin()} successfully created");
     }
-
-
-    #[Route('/api/login/login_check', methods: ['GET'])]
-    public function getUserToken(UserInterface $user, JWTTokenManagerInterface $tokenManager): JsonResponse
-    {
-//        $userToken = $tokenManager->create($user);
-//
-//        $jsonResponse = new JsonResponse(['token' => $userToken]);
-//        $jsonResponse->headers->setCookie(Cookie::create('usr_token', $userToken, time() + 3600));
-//
-//        return $jsonResponse;
-    }
 }

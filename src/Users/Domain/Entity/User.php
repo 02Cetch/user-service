@@ -2,6 +2,7 @@
 
 namespace App\Users\Domain\Entity;
 
+use App\Users\Domain\Entity\ValueObject\UserRoles;
 use App\Users\Domain\Service\UserPasswordHasherInterface;
 
 class User implements UserInterface
@@ -9,7 +10,7 @@ class User implements UserInterface
     private int $id;
     private string $login;
     private string $password;
-    private array $roles;
+    private UserRoles $roles;
 
     public string $virtual_password;
     private string $virtual_role;
@@ -22,7 +23,7 @@ class User implements UserInterface
 
     public function __construct(array $roles = [])
     {
-        $this->roles = $roles;
+        $this->roles = new UserRoles($roles);
     }
 
     public function setLogin($login): void
@@ -47,23 +48,36 @@ class User implements UserInterface
 
     public function setRoles($roles): void
     {
-        $this->roles = $roles;
+        $this->roles = new UserRoles($roles);
     }
 
     public function getRoles(): array
     {
-        return $this->roles;
+        return $this->roles->value();
     }
 
     public function getVirtualRole()
     {
-        return array_values($this->roles)[0] ?? $this->virtual_role;
+        return $this->roles->getRole() ?? $this->virtual_role;
     }
 
     public function setVirtualRole($role)
     {
         $this->virtual_role = $role;
         $this->setRoles([$role]);
+    }
+
+    public function getData(): array
+    {
+        return [
+            'login' => $this->getLogin(),
+            'role' => $this->roles->getRole() ?? null,
+            'first_name' => $this->first_name ?? null,
+            'last_name' => $this->last_name ?? null,
+            'mid_name' => $this->mid_name ?? null,
+            'phone' => $this->phone ?? null,
+            'slack_id' => $this->slack_id ?? null
+        ];
     }
 
     public function eraseCredentials()

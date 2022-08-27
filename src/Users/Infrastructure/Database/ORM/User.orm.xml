@@ -20,7 +20,8 @@
         <field name="slack_id" type="string" nullable="true"/>
         <field name="login" type="string" unique="true" nullable="false"/>
         <field name="password" type="string" nullable="false"/>
-        <field name="roles" type="array" nullable="true"/>
+
+        <embedded name="roles" class="App\Users\Domain\Entity\ValueObject\UserRoles" use-column-prefix="false" />
     </entity>
 
 </doctrine-mapping>

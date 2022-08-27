@@ -16,6 +16,12 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Users/Infrastructure/Database/ORM'
                 prefix: 'App\Users\Domain\Entity'
                 alias: Users
+            UsersValueObjects:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/src/Users/Infrastructure/Database/ORM/ValueObject'
+                prefix: 'App\Users\Domain\Entity\ValueObject'
+                alias: UsersValueObjects
 #            App:
 #                is_bundle: false
 #                dir: '%kernel.project_dir%/src/Entity'
