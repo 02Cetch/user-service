@@ -29,7 +29,10 @@ class UserCrudController extends AbstractCrudController
         if ($entityInstance->getVirtualRole()) {
             $entityInstance->setRoles([$entityInstance->getVirtualRole()]);
         }
-        $entityInstance->setPassword($entityInstance->virtual_password, new UserPasswordHasher($this->basePasswordHasher));
+
+        if (isset($entityInstance->virtual_password)) {
+            $entityInstance->setPassword($entityInstance->virtual_password, new UserPasswordHasher($this->basePasswordHasher));
+        }
 
         parent::updateEntity($entityManager, $entityInstance);
     }

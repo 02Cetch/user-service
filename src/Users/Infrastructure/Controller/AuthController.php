@@ -3,15 +3,12 @@
 namespace App\Users\Infrastructure\Controller;
 use App\Shared\Infrastructure\Controller\ApiController;
 use App\Users\Domain\Factory\UserFactory;
-use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
-use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use App\Users\Infrastructure\Service\UserPasswordHasher;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class AuthController extends ApiController
 {

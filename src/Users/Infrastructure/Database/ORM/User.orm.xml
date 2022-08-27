@@ -17,7 +17,7 @@
         <field name="last_name" type="string" nullable="true"/>
         <field name="mid_name" type="string" nullable="true"/>
         <field name="phone" type="string" nullable="true"/>
-        <field name="slack_id" type="string" nullable="true"/>
+        <field name="slack_id" type="string" unique="true" nullable="true"/>
         <field name="login" type="string" unique="true" nullable="false"/>
         <field name="password" type="string" nullable="false"/>
 

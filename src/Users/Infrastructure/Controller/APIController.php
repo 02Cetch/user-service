@@ -27,7 +27,7 @@ class APIController extends BaseApiController
     }
 
     #[Route('/profile/me', methods: ['POST'])]
-    public function getUserInfo(Request $request, UserInterface $user): JsonResponse
+    public function getUserInfo(UserInterface $user): JsonResponse
     {
         return new JsonResponse(
             $user->getData()
