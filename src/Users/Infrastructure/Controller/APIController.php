@@ -2,22 +2,24 @@
 
 namespace App\Users\Infrastructure\Controller;
 
+use App\Shared\Domain\Security\UserFetcherInterface;
 use App\Shared\Infrastructure\Controller\ApiController as BaseApiController;
-use App\Users\Infrastructure\Repository\UserRepository;
-use Lexik\Bundle\JWTAuthenticationBundle\Security\User\JWTUserInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 #[Route('/api')]
 class APIController extends BaseApiController
 {
-    #[Route('/login/login_check', methods: ['GET'])]
-    public function getUserToken(UserInterface $user, JWTTokenManagerInterface $tokenManager): JsonResponse
+    public function __construct(private readonly UserFetcherInterface $userFetcher)
     {
+    }
+
+    #[Route('/login/login_check', methods: ['GET'])]
+    public function getUserToken(JWTTokenManagerInterface $tokenManager): JsonResponse
+    {
+        $user = $this->userFetcher->getAuthUser();
         $userToken = $tokenManager->create($user);
 
         $jsonResponse = new JsonResponse(['token' => $userToken]);
@@ -27,8 +29,9 @@ class APIController extends BaseApiController
     }
 
     #[Route('/profile/me', methods: ['POST'])]
-    public function getUserInfo(UserInterface $user): JsonResponse
+    public function getUserInfo(): JsonResponse
     {
+        $user = $this->userFetcher->getAuthUser();
         return new JsonResponse(
             $user->getData()
         );
