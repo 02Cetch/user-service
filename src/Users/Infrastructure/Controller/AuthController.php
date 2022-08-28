@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Users\Infrastructure\Controller;
+
 use App\Shared\Infrastructure\Controller\ApiController;
 use App\Users\Domain\Factory\UserFactory;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use App\Users\Infrastructure\Service\UserPasswordHasher;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AuthController extends ApiController
@@ -22,7 +23,7 @@ class AuthController extends ApiController
         $password = $jsonRequest->get('password');
 
         if (empty($login) || empty($password)) {
-            return $this->respondValidationError("Invalid credentials");
+            return $this->respondValidationError('Invalid credentials');
         }
 
         $user = (new UserFactory(new UserPasswordHasher($basePasswordHasher)))->create($login, $password);

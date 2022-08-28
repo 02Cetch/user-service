@@ -76,7 +76,7 @@ class User implements UserInterface
             'last_name' => $this->last_name ?? null,
             'mid_name' => $this->mid_name ?? null,
             'phone' => $this->phone ?? null,
-            'slack_id' => $this->slack_id ?? null
+            'slack_id' => $this->slack_id ?? null,
         ];
     }
 

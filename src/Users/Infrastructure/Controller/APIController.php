@@ -32,6 +32,7 @@ class APIController extends BaseApiController
     public function getUserInfo(): JsonResponse
     {
         $user = $this->userFetcher->getAuthUser();
+
         return new JsonResponse(
             $user->getData()
         );
@@ -41,6 +42,7 @@ class APIController extends BaseApiController
     public function isDeveloper(): JsonResponse
     {
         $this->denyAccessUnlessGranted('ROLE_DEVELOPER');
+
         return $this->respondWithSuccess('Access granted');
     }
 
@@ -48,6 +50,7 @@ class APIController extends BaseApiController
     public function isAdmin(): JsonResponse
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         return $this->respondWithSuccess('Access granted');
     }
 }

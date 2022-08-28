@@ -10,7 +10,7 @@ class UserRoles extends ArrayValueObject
     public const ALLOWED_ROLES = [
         'admin' => 'ROLE_ADMIN',
         'developer' => 'ROLE_DEVELOPER',
-        'user' => 'ROLE_USER'
+        'user' => 'ROLE_USER',
     ];
 
     public function __construct(protected array $value)
@@ -27,6 +27,7 @@ class UserRoles extends ArrayValueObject
             return true;
         }
         $allowedRoles = array_values(self::ALLOWED_ROLES);
+
         return in_array($this->value[0], $allowedRoles);
     }
 
@@ -34,5 +35,4 @@ class UserRoles extends ArrayValueObject
     {
         return $this->value[0] ?? '';
     }
-
 }

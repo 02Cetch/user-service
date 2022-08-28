@@ -11,7 +11,7 @@ class JsonErrorNormalizer implements NormalizerInterface
     {
         return [
             'code' => $object->getStatusCode(),
-            'message' => $object->getMessage()
+            'message' => $object->getMessage(),
         ];
     }
 

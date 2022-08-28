@@ -2,7 +2,7 @@
 
 namespace App\Admin\Infrastructure\Controller;
 
-use App\Admin\Application\ContextAdapters\UserAdapter;
+use App\Admin\Infrastructure\ContextAdapters\UserAdapter;
 use App\Users\Infrastructure\Service\UserPasswordHasher;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -14,7 +14,6 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserCrudController extends AbstractCrudController
 {
-
     public function __construct(private readonly UserPasswordHasherInterface $basePasswordHasher)
     {
     }
@@ -59,7 +58,7 @@ class UserCrudController extends AbstractCrudController
             TelephoneField::new('phone'),
             TextField::new('slack_id'),
 
-            ChoiceField::new('virtual_role', 'Role')->setChoices(UserAdapter::getAllowedUserRoles())
+            ChoiceField::new('virtual_role', 'Role')->setChoices(UserAdapter::getAllowedUserRoles()),
         ];
     }
 }

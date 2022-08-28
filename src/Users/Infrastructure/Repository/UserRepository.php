@@ -28,5 +28,4 @@ class UserRepository extends ServiceEntityRepository
     {
         return $this->findOneBy(['login' => $login]);
     }
-
 }
