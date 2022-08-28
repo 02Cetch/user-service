@@ -2,7 +2,7 @@
 
 namespace App\Admin\Infrastructure\Controller;
 
-use App\Admin\Infrastructure\ContextAdapters\UserAdapter;
+use App\Admin\Infrastructure\ContextAdapter\UserAdapter;
 use App\Users\Infrastructure\Service\UserPasswordHasher;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -49,16 +49,23 @@ class UserCrudController extends AbstractCrudController
     {
         return [
             TextField::new('login'),
+
             TextField::new('virtual_password', 'Password')->setFormType(PasswordType::class)
                 ->hideOnIndex()
                 ->hideOnDetail(),
+            TextField::new('virtual_password', 'Password')->setRequired(true)
+                ->hideOnIndex()
+                ->hideOnDetail()
+                ->hideWhenUpdating(),
+
             TextField::new('first_name'),
             TextField::new('last_name'),
             TextField::new('mid_name'),
             TelephoneField::new('phone'),
             TextField::new('slack_id'),
 
-            ChoiceField::new('virtual_role', 'Role')->setChoices(UserAdapter::getAllowedUserRoles()),
+            ChoiceField::new('virtual_role', 'Role')->setChoices(UserAdapter::getAllowedUserRoles())
+                ->setRequired(true),
         ];
     }
 }

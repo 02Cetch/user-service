@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Infrastructure\ContextAdapters;
+namespace App\Admin\Infrastructure\ContextAdapter;
 
 use App\Users\Infrastructure\ContextAPI\UsersAPI;
 
